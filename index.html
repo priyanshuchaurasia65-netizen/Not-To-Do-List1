@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding:0;
+            margin:0;
+            box-sizing: border-box;
+        }
+        .form{
+            background-color: rgb(90, 83, 83);
+            border:solid 2px rgb(232, 31, 31);
+            overflow: hidden;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            height:100vh;
+            width:100vw;
+        }
+        .box{
+            border:solid 2px rgb(61, 59, 59);
+            background-color: rgb(48, 48, 207);
+            border-radius: 1rem;
+            width:50%;
+            height:90%;
+             display: flex;
+            justify-content: center;
+            /* align-items: center; */
+             font-size: 2rem;
+            color: white;
+            flex-direction: column;
+            padding:2rem;
+             font-size: 1.7rem;
+             gap:2rem;
+             overflow: hidden;
+        }
+        #bt{
+            width:20%;
+        }
+        .box1{
+            display: flex;
+            justify-content: space-between;
+            /* align-items: center; */
+            /* padding:1rem; */
+            margin-top: 3rem;
+        }
+        @media (max-width:820px){
+            .box{
+                height:96%;
+                margin:3rem;
+                width:70%;
+            }
+            .box1{
+                gap:1rem;
+            }
+             
+        }
+          @media (max-width:600px){
+            .box{
+                height:96%;
+                margin:3rem;
+                width:90%;
+            }
+            .box1{
+                gap:1rem;
+            }
+             
+        }
+          @media (max-width:500px){
+            .box{
+                height:96%;
+                margin:0.7rem;
+                width:100%;
+            }
+            .box1{
+                gap:1rem;
+            }
+             
+        }
+        .box1 input{
+            padding: 1rem;
+            font-size: 1.2rem;
+            border-radius: 1rem;
+           width: 70%;
+            border: none;
+        }
+        .box1 button{
+            padding:0.5rem;
+            border-radius: 0.5rem;
+            max-width: 10rem;
+            border: none;
+            font-weight: bold;
+            font-size: 1rem;
+            background-color: #cec8c8;
+        }
+        .easybox,.mediumbox,.hardbox{
+            background-color: rgb(255, 0, 51);
+            background: conic-gradinent(#29965d var(--progress-degree,100%),#084a0e 100%);
+            border-radius:50%;
+            padding:1rem;
+            margin:0.5rem;
+            width:10rem;
+            height:10rem;
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            padding-top: 3rem;
+            font-size: 1.7rem;
+            color: white;
+        }
+        .creation{
+            font-size: 1.5rem;
+             font-size: 1.2rem;
+             display:none;
+             justify-content: space-between;
+             flex-direction: row;
+             gap:2rem;
+            align-items: center;
+            background-color:white;
+            border: 1px solid rgb(116, 110, 110);
+            width: 90%;
+            padding-right: 0.4rem;
+            padding-left: 0.2rem;
+            padding-top: 0.3rem;
+            padding-bottom: 0.3rem;
+            background-color: white;
+            border-radius: 1rem;
+            min-height: 3rem;
+        }
+        .creation span{
+            color: black;
+            font-size: 1.6rem;
+        }
+        #bt:hover{
+            background-color: rgb(186, 175, 175);
+        }
+        #delete:hover{
+            background-color: rgb(186, 175, 175);
+        }
+          #edit:hover{
+            background-color: rgb(186, 175, 175);
+        }
+        .item{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap:1rem;
+             margin-top: 2rem;
+        }
+        .box3{
+             display: flex;
+             flex-direction: row;
+             justify-content: center;
+             align-items: center;
+             gap:0.4rem;
+             flex-shrink: 0;
+        }
+        .item{
+            overflow-y: auto;
+        }
+        .item span{
+            word-break: break-word;
+            white-space: normal;
+            padding: 0.5rem;
+            overflow-y: auto;
+            flex:1;
+        }
+    </style>
+</head>
+<body>
+    <div class="form">
+            <div class="box">
+            <h1>Not To Do List</h1>
+            <h5>Enter your Completed Projects:</h5>
+            <div class="box1">
+                <input placeholder="Please enter Completed project name...." id="input">
+            <button id="bt" type="button">Submit</button>
+            </div>
+            <div class="item">
+
+            </div>
+        </div>
+    </div>
+    <script>
+    document.addEventListener('DOMContentLoaded',()=>{
+  const form=document.querySelector('.form');
+  const box=document.querySelector('.box');
+  const box1=document.querySelector('.box1');
+  const input=document.getElementById('input');
+   const bottum=document.getElementById('bt');
+   const box2=document.querySelector('.box2');
+   const easy=document.querySelector('.easybox');
+   const medium=document.querySelector('.mediumbox');
+   const hard=document.querySelector('.hardbox');
+    const text=document.querySelector('#input');
+    const bt=document.querySelector("#bt");
+   const item=document.querySelector(".item");
+   // add function called when submit or Enter button is clicked.
+    function addtask(e){
+  e.preventDefault();
+  const textname=text.value.trim();
+  if(textname===""){
+    alert("project name must not be empty. Please enter project name");
+    return;
+  }
+    const creation=document.createElement("div");
+    creation.classList.add("creation");
+    const box3=document.createElement("div");
+    box3.classList.add("box3");
+    const span=document.createElement("span");
+    span.textContent=textname;
+    const deletebutton=document.createElement("button");
+    deletebutton.id="delete";
+    const deleteimg=document.createElement("img");
+    deleteimg.src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQE1b8B2NUJtIBonxzCMrj-ff815zcvazL_ww&s";
+    deleteimg.height="25";
+    deleteimg.width="25";
+    deletebutton.appendChild(deleteimg);
+    const editbutton=document.createElement("button");
+    editbutton.id="edit";
+    const editimg=document.createElement("img");
+     editimg.src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlRpYzCNgof4S7x1rryvTUu1vCEHYu6W-F9w&s";
+    editimg.height="25";
+    editimg.width="25";
+    editbutton.appendChild(editimg);
+      creation.appendChild(span);
+      box3.appendChild(editbutton);
+      box3.appendChild(deletebutton);
+     creation.appendChild(box3);
+    item.appendChild(creation);
+   text.value="";
+   creation.style.display="flex";
+      //DELETE FUNTION
+   deletebutton.addEventListener('click',()=>{
+    item.removeChild(creation);
+   })
+   //EDIT FUNCTION
+   editbutton.addEventListener('click',()=>{
+    const newname=span.textContent;
+    const check=prompt("Edit your project name:",newname);
+    if(check!==null && check.trim()!==""){
+        span.textContent=check.trim();
+    }
+   });
+};
+//add task
+bt.addEventListener('click',addtask);
+   //ENTER KEY FUNCTION
+ text.addEventListener('keydown',(e)=>{
+    if(e.key==="Enter"){
+        e.preventDefault();
+        addtask(e);
+    }
+   });
+
+});
+    </script>
+</body>
+</html>
